@@ -1,103 +1,475 @@
+"use client";
+
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isScrolled, setIsScrolled] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const servicesCard1Ref = useRef<HTMLDivElement>(null);
+  const servicesCard2Ref = useRef<HTMLDivElement>(null);
+  const contactCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const cardsToAnimate: (HTMLDivElement | null)[] = [
+      servicesCard1Ref.current,
+      servicesCard2Ref.current,
+      contactCardRef.current
+    ].filter(Boolean);
+
+    const MAX_ROTATION = 5;
+    const SCALE_FACTOR = 1.03;
+    const PERSPECTIVE = '1000px';
+
+    const listeners: { card: HTMLDivElement, move: (event: MouseEvent) => void, leave: () => void }[] = [];
+
+    cardsToAnimate.forEach(card => {
+      if (!card) return;
+
+      const handleMouseMove = (event: MouseEvent) => {
+        const { left, top, width, height } = card.getBoundingClientRect();
+        const x = event.clientX - left;
+        const y = event.clientY - top;
+
+        const centerX = width / 2;
+        const centerY = height / 2;
+
+        const deltaX = x - centerX;
+        const deltaY = y - centerY;
+
+        const rotateY_val = (deltaX / (width / 2)) * MAX_ROTATION;
+        const rotateX_val = -(deltaY / (height / 2)) * MAX_ROTATION;
+
+        card.style.transform = `perspective(${PERSPECTIVE}) rotateX(${rotateX_val}deg) rotateY(${rotateY_val}deg) scale3d(${SCALE_FACTOR}, ${SCALE_FACTOR}, ${SCALE_FACTOR})`;
+      };
+
+      const handleMouseLeave = () => {
+        card.style.transform = `perspective(${PERSPECTIVE}) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      };
+
+      card.addEventListener('mousemove', handleMouseMove as EventListener);
+      card.addEventListener('mouseleave', handleMouseLeave as EventListener);
+
+      listeners.push({ card, move: handleMouseMove, leave: handleMouseLeave });
+    });
+
+    return () => {
+      listeners.forEach(({ card, move, leave }) => {
+        card.removeEventListener('mousemove', move as EventListener);
+        card.removeEventListener('mouseleave', leave as EventListener);
+      });
+    };
+  }, []);
+
+
+  const textVariantLeft = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  const textVariantRight = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  const arrowVariant = {
+    hidden: { width: "0%" },
+    visible: { width: "100%", transition: { duration: 1, ease: "easeOut", delay: 0.5 } },
+  };
+
+  const iconVariant = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut", delay: 0.3 } },
+  };
+
+  const subHeadingVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 1.0 } },
+  }
+
+  const sectionRevealVariant = {
+    hidden: { opacity: 0, y: -75 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const techGridContainerVariant = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const techItemVariant = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
+  const technologies = [
+    { src: "/nextjs-icon.svg", alt: "Ícone do Next.js", name: "Next" },
+    { src: "/svelte-icon.svg", alt: "Ícone do Svelte", name: "SvelteKit" },
+    { src: "/vue-icon.svg", alt: "Ícone do Vue.js", name: "Vue" },
+    { src: "/angular-icon.svg", alt: "Ícone do Angular", name: "Angular" },
+    { src: "/typescript-icon.svg", alt: "Ícone do TypeScript", name: "TypeScript" },
+  ];
+
+  return (
+    <>
+      {/* Navbar */}
+      <header
+        className={`text-xl text-white font-light fixed py-6 w-full z-20 backdrop-blur-sm transition-all duration-300 ease-in-out ${isScrolled ? "bg-black/80" : "bg-transparent"
+          }`}
+      >
+        <nav className="flex items-center gap-x-10 max-w-5xl mx-auto px-4">
+          <Link href="#inicio" className="mr-auto">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/softhaus-logo.svg"
+              alt="Logo da Softhaus"
+              width={125}
+              height={42}
+              priority
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </Link>
+          <Link className="hidden sm:block" href="#servicos">Serviços</Link>
+          <Link className="hidden sm:block" href="#tecnologias">Tecnologias</Link>
+          <Link className="hidden sm:block" href="#sobre-nos">Sobre Nós</Link>
+        </nav>
+      </header>
+
+      <main>
+        {/* Inicio */}
+        <section id="inicio" className="flex flex-col overflow-hidden text-white items-center bg-[url(/background1.webp)] bg-cover bg-bottom bg-no-repeat">
+          <div className="flex flex-col items-center justify-center min-h-[calc(100vh-89.73px)] max-w-5xl w-full mt-[89.73px] px-4">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.5 }}
+            >
+              <motion.h1
+                variants={textVariantLeft}
+                className="text-5xl sm:text-7xl md:text-[100px] lg:text-[124px] font-semibold leading-tight lg:leading-[124px] tracking-[-4px] text-nowrap text-center sm:text-left"
+              >
+                Você tem a ideia,
+              </motion.h1>
+              <div className="flex flex-col sm:flex-row items-center sm:items-start">
+                <div className="flex flex-col">
+                  <motion.h2
+                    variants={textVariantRight}
+                    className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-semibold leading-tight lg:leading-[124px] tracking-[-2px] lg:tracking-[-4px] text-center sm:text-left"
+                  >
+                    a gente cria.
+                  </motion.h2>
+                  <motion.div
+                    variants={arrowVariant}
+                    className="mt-10 mb-6 relative h-[2px] w-0 bg-white after:border-r-2 after:border-b-2 after:border-white after:block after:w-[16px] after:h-[16px] after:absolute after:-top-[7px] after:right-0 after:rotate-[-45deg]"
+                  ></motion.div>
+                  <motion.p
+                    variants={subHeadingVariant}
+                    className="text-xl md:text-2xl lg:text-3xl font-extralight leading-relaxed lg:leading-[51px] tracking-[1px] lg:tracking-[3px]"
+                  >
+                    Seu site <b>responsivo</b>, <b>otimizado</b> e <b>intuitivo</b>.
+                  </motion.p>
+                </div>
+                <motion.div
+                  variants={iconVariant}
+                  className="m-6 flex justify-center items-center flex-1"
+                >
+                  <Image
+                    src="/softhaus-icon.svg"
+                    alt="Ícone decorativo Softhaus"
+                    width={150}
+                    height={240}
+                    priority
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Serviços */}
+        <section id="servicos" className="relative flex flex-col items-center bg-[url(/background2.webp)] bg-cover bg-center bg-no-repeat">
+          <motion.div
+            className="flex flex-col items-center justify-evenly min-h-[calc(100vh-89.73px)] max-w-5xl w-full py-16 md:py-24 px-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            variants={sectionRevealVariant}
           >
-            Read our docs
-          </a>
-        </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 md:mb-16">Serviços</h2>
+            <div className="flex flex-col md:flex-row gap-8 z-10 text-white">
+              <div
+                ref={servicesCard1Ref}
+                className="flex flex-col gap-y-8 p-6 pb-8 rounded-2xl w-full max-w-[412px] bg-gradient-to-b from-black to-[#240218]"
+                style={{ transition: 'transform 0.15s ease-out' }}
+              >
+                <div className="bg-white rounded-2xl h-[200px] md:h-[250px]"></div>
+                <h3 className="text-2xl md:text-3xl font-bold text-center">Desenvolvimento de Websites</h3>
+                <p className="text-lg md:text-xl text-center md:text-left">
+                  Criamos websites sob medida, com foco em desempenho, usabilidade e inovação, para alavancar seu negócio.
+                </p>
+              </div>
+              <div
+                ref={servicesCard2Ref}
+                className="flex flex-col gap-y-8 p-6 pb-8 rounded-2xl w-full max-w-[412px] bg-gradient-to-b from-black to-[#240218]"
+                style={{ transition: 'transform 0.15s ease-out' }}
+              >
+                <div className="bg-white rounded-2xl h-[200px] md:h-[250px]"></div>
+                <h3 className="text-2xl md:text-3xl font-bold text-center">Desenvolvimento de Aplicativos</h3>
+                <p className="text-lg md:text-xl text-center md:text-left">
+                  Desenvolvemos aplicativos mobile intuitivos e performáticos, transformando suas ideias em soluções digitais.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+          <Image
+            src="/divider.svg"
+            alt="Divisor de seção ondulado"
+            className="absolute bottom-0 -mb-[1px] sm:-mb-[86px] md:-mb-[172px] w-full h-auto"
+            width={1920}
+            height={345}
+            sizes="100vw"
+          />
+        </section>
+
+        {/* Tecnologias */}
+        <section id="tecnologias" className="flex flex-col text-white items-center bg-[url(/background3.webp)] bg-cover bg-bottom bg-no-repeat">
+          <motion.div
+            className="flex flex-col justify-center min-h-[calc(100vh-89.73px)] max-w-5xl w-full py-16 md:py-24 px-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            variants={sectionRevealVariant}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-[60px] md:mb-[80px]">Tecnologias</h2>
+            <p className="text-4xl md:text-5xl lg:text-6xl leading-tight md:leading-[64px] font-medium tracking-[-1px] text-center md:text-left max-w-[600px] mx-auto md:mx-0">
+              Aplicações modernas com as tecnologias mais utilizadas
+            </p>
+            <div className="my-[38px] h-[15px] p-[1px] rounded-2xl bg-[linear-gradient(to_right,black,white)]">
+              <div className="h-full w-full rounded-2xl bg-[linear-gradient(to_right,black_25%,rgba(0,0,0,0.5))]"></div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-x-8 lg:gap-x-[96px] gap-y-10">
+              <div className="flex flex-col gap-y-8 md:gap-y-12 flex-1">
+                <p className="text-lg md:text-xl lg:text-2xl leading-relaxed md:leading-[44px] tracking-[-1px]">
+                  Para desenvolver sites modernos, usamos um conjunto de tecnologias que garantem <b>performance</b>, <b>segurança</b> e uma excelente <b>experiência</b> do usuário.
+                </p>
+                <p className="text-lg md:text-xl lg:text-2xl leading-relaxed md:leading-[44px] tracking-[-1px]">
+                  Utilizamos os frameworks mais populares e consolidados do mercado — como <b>Next</b>, <b>Vue</b> e <b>Angular</b>.
+                </p>
+              </div>
+
+              <motion.div
+                className="ml-auto grid grid-rows-3 grid-cols-2 w-full md:w-fit gap-y-8 md:gap-y-12 lg:gap-y-16 gap-x-4 md:gap-x-8 place-items-start"
+                variants={techGridContainerVariant}
+              >
+                {technologies.map((tech) => (
+                  <motion.div
+                    key={tech.name}
+                    className="flex items-center gap-x-3 md:gap-x-4"
+                    variants={techItemVariant}
+                  >
+                    <Image
+                      src={tech.src}
+                      alt={tech.alt}
+                      width={50}
+                      height={50}
+                    />
+                    <p className="text-xl md:text-2xl">{tech.name}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Sobre Nós */}
+        <section id="sobre-nos" className="flex flex-col items-center">
+          <motion.div
+            className="flex flex-col justify-center min-h-[100vh] max-w-5xl w-full text-[#240218] px-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            variants={sectionRevealVariant}
+          >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-[48px] md:mb-[64px]">
+              Quem<br />somos
+            </h2>
+            <p className="text-lg md:text-xl leading-relaxed">
+              A <b>Softhaus</b> é especializada na criação de sites <b>modernos</b>, <b>eficientes</b> e <b>sob medida</b> para cada cliente. Nosso compromisso é com a <b>qualidade</b>, a <b>rapidez</b> e a <b>satisfação</b> total de nossos clientes — entregando sites visualmente <b>atraentes</b>, <b>responsivos</b> e <b>otimizados</b> para resultados reais. Seja qual for o tamanho do seu projeto, garantimos agilidade na entrega e excelência em cada linha de código.
+            </p>
+            <br />
+            <p className="text-lg md:text-xl leading-relaxed">
+              Nossa empresa nasceu do desejo de transformar ideias em realidade de forma <b>rápida</b> e <b>eficaz</b> e conta com uma equipe de funcionários <b>capacitada</b> para <b>transformar suas ideias em realidade</b>.
+            </p>
+            <div className="my-[32px] h-[15px] p-[1px] rounded-2xl bg-gradient-to-r from-white to-[#240218]">
+              <div className="h-full w-full rounded-2xl bg-[linear-gradient(to_right,white_50%,#240218)]"></div>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-[48px] md:mb-[64px]">Equipe</h3>
+            <div className="flex flex-wrap justify-around gap-10">
+              <div className="flex items-center gap-x-4 md:gap-x-6">
+                <div className="rounded-full bg-gray-300 w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
+                <div className="w-[180px] h-[80px] md:w-[256px] md:h-[128px] bg-gray-300 p-4 rounded">
+                  <p className="font-semibold"></p>
+                  <p className="text-sm"></p>
+                </div>
+              </div>
+              <div className="flex items-center gap-x-4 md:gap-x-6">
+                <div className="rounded-full bg-gray-300 w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
+                <div className="w-[180px] h-[80px] md:w-[256px] md:h-[128px] bg-gray-300 p-4 rounded">
+                  <p className="font-semibold"></p>
+                  <p className="text-sm"></p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Contato */}
+        <section id="contato" className="relative overflow-hidden flex justify-center text-white items-center bg-[url(/background5.png)] bg-cover bg-top bg-no-repeat">
+          <motion.div
+            className="flex flex-wrap max-w-5xl w-full px-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3 }}
+            variants={sectionRevealVariant}
+          >
+            <div
+              className="flex flex-col flex-1 justify-center min-h-[calc(100vh-89.73px)] z-10"
+            >
+              <h1 className="text-[64px] font-bold md:text-5xl lg:text-6xl leading-[65px] tracking-[-1px] text-center md:text-left max-w-[600px] mx-auto md:mx-0">
+                Sua visão, nossa tecnologia
+              </h1>
+              <p className="my-10 md:my-20 text-xl leading-[29px] tracking-[-1px] text-center md:text-left">
+                Acreditamos que cada linha de código pode ser o início de uma <b>grande transformação</b>. Se você tem uma <b>visão</b>, um <b>desafio tecnológico</b> ou a <b>necessidade de otimizar processos</b>, estamos aqui para ouvir e, juntos, desenhar a <b>solução ideal</b>.
+              </p>
+              <h3 className="font-bold text-[32px] leading-[65px] tracking-[-1px] text-center md:text-left">
+                Entre em contato
+              </h3>
+
+              <div className="flex flex-col items-center md:items-start">
+                {/* Email */}
+                <Link href="mailto:contato@exemplo.com" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
+                  <Image
+                    src="/email-icon.svg"
+                    alt="Ícone do Email"
+                    width={30}
+                    height={30}
+                  />
+                  <p className="text-xl tracking-[-1px]">Email</p>
+                  <div
+                    className="relative rotate-[-45deg] h-[2px] w-[20px] bg-[#240218] after:border-r-2 after:border-b-2 after:border-[#240218] after:block after:w-[8px] after:h-[8px] after:absolute after:-top-[3px] after:right-0 after:rotate-[-45deg]"
+                  ></div>
+                </Link>
+
+                {/* WhatsApp */}
+                <Link href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
+                  <Image
+                    src="/whatsapp-icon.svg"
+                    alt="Ícone do WhatsApp"
+                    width={30}
+                    height={30}
+                  />
+                  <p className="text-xl tracking-[-1px]">WhatsApp</p>
+                  <div
+                    className="relative rotate-[-45deg] h-[2px] w-[20px] bg-[#240218] after:border-r-2 after:border-b-2 after:border-[#240218] after:block after:w-[8px] after:h-[8px] after:absolute after:-top-[3px] after:right-0 after:rotate-[-45deg]"
+                  ></div>
+                </Link>
+
+                {/* LinkedIn */}
+                <Link href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
+                  <Image
+                    src="/linkedin-icon.svg"
+                    alt="Ícone do LinkedIn"
+                    width={30}
+                    height={30}
+                  />
+                  <p className="text-xl tracking-[-1px]">LinkedIn</p>
+                  <div
+                    className="relative rotate-[-45deg] h-[2px] w-[20px] bg-[#240218] after:border-r-2 after:border-b-2 after:border-[#240218] after:block after:w-[8px] after:h-[8px] after:absolute after:-top-[3px] after:right-0 after:rotate-[-45deg]"
+                  ></div>
+                </Link>
+              </div>
+            </div>
+
+            <div
+              className="flex flex-col text-black w-full flex-1 justify-center items-center max-w-[350px] mx-auto z-10 sm:mx-6 sm:max-w-none py-10 md:py-0"
+            >
+              <div
+                ref={contactCardRef}
+                className="flex flex-col justify-center text-center gap-y-6 p-6 pb-8 rounded-2xl bg-white w-full"
+                style={{ transition: 'transform 0.15s ease-out' }}
+              >
+                <h3 className="text-4xl font-bold leading-[34px] tracking-[-1px]">
+                  Nos mande uma mensagem!
+                </h3>
+                <input className="bg-[#d9d9d9] p-3 rounded-md placeholder:text-[#9e9e9e] w-full" type="text" placeholder="Nome" />
+                <input className="bg-[#d9d9d9] p-3 rounded-md placeholder:text-[#9e9e9e] w-full" type="tel" placeholder="Número" />
+                <input className="bg-[#d9d9d9] p-3 rounded-md placeholder:text-[#9e9e9e] w-full" type="email" placeholder="Email" />
+                <textarea rows={5} className="bg-[#d9d9d9] p-3 rounded-md placeholder:text-[#9e9e9e] w-full resize-none" placeholder="Mensagem"></textarea>
+                <button type="submit" className="bg-[#240218] text-white p-3 rounded-md hover:bg-opacity-90 transition-colors cursor-pointer w-full">
+                  Enviar Mensagem
+                </button>
+              </div>
+            </div>
+          </motion.div>
+          <Image
+            src="/divider.svg"
+            alt="Divisor de seção ondulado"
+            className="absolute bottom-0 rotate-[2.13deg] w-full h-auto"
+            width={1920}
+            height={675}
+            sizes="100vw"
+          />
+        </section>
+
+        {/* Rodape */}
+        <footer className="relative w-full bg-[url(/background4.webp)] bg-cover bg-no-repeat">
+          <div className="flex flex-col sm:flex-row text-white text-lg md:text-xl gap-y-8 sm:gap-x-10 items-center max-w-5xl py-10 md:py-14 mx-auto px-4">
+            <Link href="#inicio" className="mx-auto">
+              <Image
+                src="/softhaus-logo.svg"
+                alt="Logo da Softhaus (Rodapé)"
+                width={180}
+                height={60}
+              />
+            </Link>
+            <div className="text-center text-white/70 text-sm">
+              © {new Date().getFullYear()} Softhaus. Todos os direitos reservados.
+            </div>
+            <Link href="#servicos">Serviços</Link>
+            <Link href="#tecnologias">Tecnologias</Link>
+            <Link href="#sobre-nos">Sobre Nós</Link>
+          </div>
+        </footer>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
