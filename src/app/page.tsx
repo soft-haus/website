@@ -160,6 +160,7 @@ export default function Home() {
           <Link className="hidden sm:block text-white/80 hover:text-white" href="#servicos">Serviços</Link>
           <Link className="hidden sm:block text-white/80 hover:text-white" href="#tecnologias">Tecnologias</Link>
           <Link className="hidden sm:block text-white/80 hover:text-white" href="#sobre-nos">Sobre Nós</Link>
+          <Link className="hidden sm:block text-black bg-white font-normal px-4 rounded-full" href="#contato">Contato</Link>
         </nav>
       </header>
 
