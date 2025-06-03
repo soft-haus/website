@@ -144,7 +144,7 @@ export default function Home() {
     <>
       {/* Navbar */}
       <header
-        className={`text-xl text-white font-light fixed py-6 w-full z-20 backdrop-blur-sm transition-all duration-300 ease-in-out ${isScrolled ? "bg-black/80" : "bg-transparent"
+        className={`text-xl text-white font-light fixed py-6 w-full z-20 transition-all duration-300 ease-in-out ${isScrolled ? "bg-black/80 backdrop-blur-sm" : "bg-transparent"
           }`}
       >
         <nav className="flex items-center gap-x-10 max-w-5xl mx-auto px-4">
@@ -157,9 +157,9 @@ export default function Home() {
               priority
             />
           </Link>
-          <Link className="hidden sm:block" href="#servicos">Serviços</Link>
-          <Link className="hidden sm:block" href="#tecnologias">Tecnologias</Link>
-          <Link className="hidden sm:block" href="#sobre-nos">Sobre Nós</Link>
+          <Link className="hidden sm:block text-white/80 hover:text-white" href="#servicos">Serviços</Link>
+          <Link className="hidden sm:block text-white/80 hover:text-white" href="#tecnologias">Tecnologias</Link>
+          <Link className="hidden sm:block text-white/80 hover:text-white" href="#sobre-nos">Sobre Nós</Link>
         </nav>
       </header>
 
