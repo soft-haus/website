@@ -160,7 +160,9 @@ export default function Home() {
           <Link className="hidden sm:block text-white/80 hover:text-white" href="#servicos">Serviços</Link>
           <Link className="hidden sm:block text-white/80 hover:text-white" href="#tecnologias">Tecnologias</Link>
           <Link className="hidden sm:block text-white/80 hover:text-white" href="#sobre-nos">Sobre Nós</Link>
-          <Link className="hidden sm:block text-black bg-white font-normal px-4 rounded-full" href="#contato">Contato</Link>
+          <Link className="hidden sm:block text-black bg-white font-bold uppercase tracking-[-1px] px-4 py-1 rounded-full" href="#contato">
+            Contato
+          </Link>
         </nav>
       </header>
 
@@ -263,7 +265,7 @@ export default function Home() {
         {/* Tecnologias */}
         <section id="tecnologias" className="flex flex-col text-white items-center bg-[url(/background3.webp)] bg-cover bg-bottom bg-no-repeat">
           <motion.div
-            className="flex flex-col justify-center min-h-[calc(100vh-89.73px)] max-w-5xl w-full py-16 md:py-24 px-4"
+            className="flex flex-col justify-center min-h-[calc(100vh-89.73px)] h-full max-w-5xl w-full py-16 md:py-24 px-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -314,7 +316,7 @@ export default function Home() {
         {/* Sobre Nós */}
         <section id="sobre-nos" className="flex flex-col items-center">
           <motion.div
-            className="flex flex-col justify-center min-h-[100vh] max-w-5xl w-full text-[#240218] px-4"
+            className="flex flex-col justify-center min-h-[100vh] max-w-5xl w-full text-[#240218] p-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -336,18 +338,16 @@ export default function Home() {
             <h3 className="text-2xl md:text-3xl font-bold mb-[48px] md:mb-[64px]">Equipe</h3>
             <div className="flex flex-wrap justify-around gap-10">
               <div className="flex items-center gap-x-4 md:gap-x-6">
-                <div className="rounded-full bg-gray-300 w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
-                <div className="w-[180px] h-[80px] md:w-[256px] md:h-[128px] bg-gray-300 p-4 rounded">
-                  <p className="font-semibold"></p>
-                  <p className="text-sm"></p>
-                </div>
+                <div className="rounded-full bg-[url(/pedro.jpeg)] bg-center bg-cover w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
+                <p className="w-[180px] md:w-[256px]">
+                  Um ano de experiência profissional como <b>desenvolvedor front-end</b>, especializado em <b>SvelteKit</b>, <b>Next.js</b> e conhecimento prático em <b>design UX/UI</b>.
+                </p>
               </div>
               <div className="flex items-center gap-x-4 md:gap-x-6">
-                <div className="rounded-full bg-gray-300 w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
-                <div className="w-[180px] h-[80px] md:w-[256px] md:h-[128px] bg-gray-300 p-4 rounded">
-                  <p className="font-semibold"></p>
-                  <p className="text-sm"></p>
-                </div>
+                <div className="rounded-full bg-[url(/henrique.jpeg)] bg-center bg-cover w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
+                <p className="w-[180px] md:w-[256px]">
+                  Seis anos de experiência profissional como <b>desenvolvedor full-stack</b> com experiência em <b>Next.js</b>, <b>SvelteKit</b>, <b>Vue</b>, <b>Angular</b> entre outras diversas tecnologias, inclusive a criação de <b>aplicações mobile</b> utilizando <b>React Native</b>.
+                </p>
               </div>
             </div>
           </motion.div>
@@ -356,7 +356,7 @@ export default function Home() {
         {/* Contato */}
         <section id="contato" className="relative overflow-hidden flex justify-center text-white items-center bg-[url(/background5.png)] bg-cover bg-top bg-no-repeat">
           <motion.div
-            className="flex flex-wrap max-w-5xl w-full px-4"
+            className="flex flex-wrap max-w-5xl w-full px-4 pt-[60px] sm:pt-[30px]"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -365,19 +365,19 @@ export default function Home() {
             <div
               className="flex flex-col flex-1 justify-center min-h-[calc(100vh-89.73px)] z-10"
             >
-              <h1 className="text-[35px] font-bold md:text-5xl lg:text-5xl sm:leading-[35px] md:leading-[45px] leading-[50px] tracking-[-1px] text-center md:text-left max-w-[600px] mx-auto md:mx-0">
+              <h1 className="text-[35px] font-bold md:text-5xl lg:text-5xl sm:leading-[35px] sm:text-left md:leading-[45px] leading-[50px] tracking-[-1px] text-center max-w-[600px] mx-auto md:mx-0">
                 Sua visão, <br/> nossa tecnologia
               </h1>
-              <p className="my-10 md:my-10 text-xl leading-[29px] tracking-[-1px] text-center md:text-left">
+              <p className="my-10 md:my-10 text-xl leading-[29px] tracking-[-1px] text-center sm:text-left">
                 Acreditamos que cada linha de código pode ser o início de uma <b>grande transformação</b>. Se você tem uma <b>visão</b>, um <b>desafio tecnológico</b> ou a <b>necessidade de otimizar processos</b>, estamos aqui para ouvir e, juntos, desenhar a <b>solução ideal</b>.
               </p>
-              <h3 className="font-bold text-[26px] leading-[65px] tracking-[-1px] text-center md:text-left">
+              <h3 className="font-bold text-[26px] leading-[65px] tracking-[-1px] text-center sm:text-left">
                 Entre em contato
               </h3>
 
-              <div className="flex flex-col items-center md:items-start">
+              <div className="flex flex-col items-center sm:items-start">
                 {/* Email */}
-                <Link href="mailto:contato@exemplo.com" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
+                <Link href="mailto:henriqueborgeshbr@proton.me" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
                   <Image
                     src="/email-icon.svg"
                     alt="Ícone do Email"
@@ -444,7 +444,7 @@ export default function Home() {
           <Image
             src="/divider.svg"
             alt="Divisor de seção ondulado"
-            className="absolute bottom-0 w-full h-auto bottom-[-170px]"
+            className="absolute w-full h-auto bottom-[-170px]"
             width={1920}
             height={400}
             sizes="100vw"
