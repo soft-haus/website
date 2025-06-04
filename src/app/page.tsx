@@ -171,7 +171,7 @@ export default function Home() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.5 }}
+              viewport={{ once: true, amount: 0.5 }}
             >
               <motion.h1
                 variants={textVariantLeft}
@@ -218,10 +218,10 @@ export default function Home() {
         {/* Serviços */}
         <section id="servicos" className="relative flex flex-col items-center bg-[url(/background2.webp)] bg-cover bg-center bg-no-repeat">
           <motion.div
-            className="flex flex-col items-center justify-evenly min-h-[calc(100vh-89.73px)] max-w-5xl w-full py-16 md:py-24 px-4"
+            className="flex flex-col items-center min-h-[calc(100vh-89.73px)] max-w-5xl w-full py-16 px-4"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.5 }}
             variants={sectionRevealVariant}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-12 md:mb-16">Serviços</h2>
@@ -266,7 +266,7 @@ export default function Home() {
             className="flex flex-col justify-center min-h-[calc(100vh-89.73px)] max-w-5xl w-full py-16 md:py-24 px-4"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.5 }}
             variants={sectionRevealVariant}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-[60px] md:mb-[80px]">Tecnologias</h2>
@@ -317,7 +317,7 @@ export default function Home() {
             className="flex flex-col justify-center min-h-[100vh] max-w-5xl w-full text-[#240218] px-4"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.5 }}
             variants={sectionRevealVariant}
           >
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-[48px] md:mb-[64px]">
@@ -359,19 +359,19 @@ export default function Home() {
             className="flex flex-wrap max-w-5xl w-full px-4"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.5 }}
             variants={sectionRevealVariant}
           >
             <div
               className="flex flex-col flex-1 justify-center min-h-[calc(100vh-89.73px)] z-10"
             >
-              <h1 className="text-[64px] font-bold md:text-5xl lg:text-6xl leading-[65px] tracking-[-1px] text-center md:text-left max-w-[600px] mx-auto md:mx-0">
-                Sua visão, nossa tecnologia
+              <h1 className="text-[35px] font-bold md:text-5xl lg:text-5xl sm:leading-[35px] md:leading-[45px] leading-[50px] tracking-[-1px] text-center md:text-left max-w-[600px] mx-auto md:mx-0">
+                Sua visão, <br/> nossa tecnologia
               </h1>
-              <p className="my-10 md:my-20 text-xl leading-[29px] tracking-[-1px] text-center md:text-left">
+              <p className="my-10 md:my-10 text-xl leading-[29px] tracking-[-1px] text-center md:text-left">
                 Acreditamos que cada linha de código pode ser o início de uma <b>grande transformação</b>. Se você tem uma <b>visão</b>, um <b>desafio tecnológico</b> ou a <b>necessidade de otimizar processos</b>, estamos aqui para ouvir e, juntos, desenhar a <b>solução ideal</b>.
               </p>
-              <h3 className="font-bold text-[32px] leading-[65px] tracking-[-1px] text-center md:text-left">
+              <h3 className="font-bold text-[26px] leading-[65px] tracking-[-1px] text-center md:text-left">
                 Entre em contato
               </h3>
 
@@ -444,9 +444,9 @@ export default function Home() {
           <Image
             src="/divider.svg"
             alt="Divisor de seção ondulado"
-            className="absolute bottom-0 rotate-[2.13deg] w-full h-auto"
+            className="absolute bottom-0 w-full h-auto bottom-[-170px]"
             width={1920}
-            height={675}
+            height={400}
             sizes="100vw"
           />
         </section>
