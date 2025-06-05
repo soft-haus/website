@@ -391,7 +391,7 @@ export default function Home() {
                 </Link>
 
                 {/* WhatsApp */}
-                <Link href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
+                <Link href="https://wa.me/5563992219697" target="_blank" rel="noopener noreferrer" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
                   <Image
                     src="/whatsapp-icon.svg"
                     alt="Ícone do WhatsApp"
@@ -405,7 +405,7 @@ export default function Home() {
                 </Link>
 
                 {/* LinkedIn */}
-                <Link href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
+                <Link href="https://www.linkedin.com/company/softhaus-co" target="_blank" rel="noopener noreferrer" className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity">
                   <Image
                     src="/linkedin-icon.svg"
                     alt="Ícone do LinkedIn"
