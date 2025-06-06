@@ -404,24 +404,81 @@ export default function Home() {
               Equipe
             </h3>
             <div className="flex flex-wrap justify-around gap-10">
-              <div className="flex items-center gap-x-4 md:gap-x-6">
-                <div className="rounded-full bg-[url(/henrique.jpeg)] bg-center bg-cover w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
-                <p className="w-[180px] md:w-[256px]">
-                  Seis anos de experiência profissional como{" "}
-                  <b>desenvolvedor full-stack</b> com experiência em{" "}
-                  <b>Next.js</b>, <b>SvelteKit</b>, <b>Vue</b>, <b>Angular</b>{" "}
-                  entre outras diversas tecnologias, inclusive a criação de{" "}
-                  <b>aplicações mobile</b> utilizando <b>React Native</b>.
-                </p>
+              <div className="flex flex-1 items-center gap-x-4 md:gap-x-6">
+                <div className="rounded-full bg-[url(/henrique.jpeg)] bg-center bg-cover min-w-[80px] h-[80px] md:min-w-[128px] md:h-[128px]"></div>
+                <div className="flex flex-col gap-y-2">
+                  <p>
+                    Seis anos de experiência profissional como{" "}
+                    <b>desenvolvedor full-stack</b> com experiência em{" "}
+                    <b>Next.js</b>, <b>SvelteKit</b>, <b>Vue</b>, <b>Angular</b>{" "}
+                    entre outras diversas tecnologias, inclusive a criação de{" "}
+                    <b>aplicações mobile</b> utilizando <b>React Native</b>.
+                  </p>
+                  <div className="flex gap-x-2">
+                    <Link
+                      href="https://www.linkedin.com/in/henriquehbr"
+                      target="_blank"
+                    >
+                      <Image
+                        src="/linkedin-icon.svg"
+                        alt="Ícone do LinkedIn"
+                        width={30}
+                        height={30}
+                      />
+                    </Link>
+                    <Link href="/curriculo-henrique.pdf" target="_blank">
+                      <Image
+                        src="/resume-icon.png"
+                        alt="Ícone de Currículo"
+                        width={30}
+                        height={30}
+                      />
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-x-4 md:gap-x-6">
-                <div className="rounded-full bg-[url(/pedro.jpeg)] bg-center bg-cover w-[80px] h-[80px] md:w-[128px] md:h-[128px]"></div>
-                <p className="w-[180px] md:w-[256px]">
-                  Um ano de experiência profissional como{" "}
-                  <b>desenvolvedor front-end</b>, especializado em{" "}
-                  <b>SvelteKit</b>, <b>Next.js</b> e conhecimento prático em{" "}
-                  <b>design UX/UI</b>.
-                </p>
+              <div className="flex flex-1 items-center gap-x-4 md:gap-x-6">
+                <div className="rounded-full bg-[url(/pedro.jpeg)] bg-center bg-cover min-w-[80px] h-[80px] md:min-w-[128px] md:h-[128px]"></div>
+                <div className="flex flex-col gap-y-2">
+                  <p>
+                    Um ano de experiência profissional como{" "}
+                    <b>desenvolvedor front-end</b>, especializado em{" "}
+                    <b>SvelteKit</b>, <b>Next.js</b> e conhecimento prático em{" "}
+                    <b>design UX/UI</b>.
+                  </p>
+                  <div className="flex gap-x-2">
+                    <Link
+                      href="https://www.linkedin.com/in/pedro-henrique-21623b210"
+                      target="_blank"
+                    >
+                      <Image
+                        src="/linkedin-icon.svg"
+                        alt="Ícone do LinkedIn"
+                        width={30}
+                        height={30}
+                      />
+                    </Link>
+                    <Link
+                      href="https://github.com/PedroHAlvesN"
+                      target="_blank"
+                    >
+                      <Image
+                        src="/github-icon.png"
+                        alt="Ícone do GitHub"
+                        width={30}
+                        height={30}
+                      />
+                    </Link>
+                    <Link href="/curriculo-pedro.pdf" target="_blank">
+                      <Image
+                        src="/resume-icon.png"
+                        alt="Ícone de Currículo"
+                        width={30}
+                        height={30}
+                      />
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -493,6 +550,21 @@ export default function Home() {
                     height={30}
                   />
                   <p className="text-xl tracking-[-1px]">LinkedIn</p>
+                  <div className="relative rotate-[-45deg] h-[2px] w-[20px] bg-[#240218] after:border-r-2 after:border-b-2 after:border-[#240218] after:block after:w-[8px] after:h-[8px] after:absolute after:-top-[3px] after:right-0 after:rotate-[-45deg]"></div>
+                </Link>
+                <Link
+                  href="https://www.instagram.com/softhaus_co"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center mt-6 gap-x-[10px] bg-white text-[#240218] rounded-md w-fit px-2 p-1 hover:opacity-90 transition-opacity"
+                >
+                  <Image
+                    src="/instagram-icon.png"
+                    alt="Ícone do Instagram"
+                    width={30}
+                    height={30}
+                  />
+                  <p className="text-xl tracking-[-1px]">Instagram</p>
                   <div className="relative rotate-[-45deg] h-[2px] w-[20px] bg-[#240218] after:border-r-2 after:border-b-2 after:border-[#240218] after:block after:w-[8px] after:h-[8px] after:absolute after:-top-[3px] after:right-0 after:rotate-[-45deg]"></div>
                 </Link>
               </div>
