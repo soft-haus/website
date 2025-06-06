@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  basePath: process.env.NODE_ENV === "development" ? undefined : "/website"
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
