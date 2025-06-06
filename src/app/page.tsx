@@ -117,12 +117,12 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold mb-12 md:mb-16">Serviços</h2>
             <div className="flex flex-col md:flex-row gap-8 z-10 text-white">
               <div ref={servicesCard1Ref} className="flex flex-col gap-y-8 p-6 pb-8 rounded-2xl w-full max-w-[412px] bg-gradient-to-b from-black to-[#240218]" style={{ transition: 'transform 0.15s ease-out' }}>
-                <div className="bg-white rounded-2xl h-[200px] md:h-[250px]"></div>
+                <div className="bg-[url(/services1.webp)] bg-cover border-white border-4 rounded-2xl h-[200px] md:h-[250px]"></div>
                 <h3 className="text-2xl md:text-3xl font-bold text-center">Desenvolvimento de Websites</h3>
                 <p className="text-lg md:text-xl text-center md:text-left">Criamos websites sob medida, com foco em desempenho, usabilidade e inovação, para alavancar seu negócio.</p>
               </div>
               <div ref={servicesCard2Ref} className="flex flex-col gap-y-8 p-6 pb-8 rounded-2xl w-full max-w-[412px] bg-gradient-to-b from-black to-[#240218]" style={{ transition: 'transform 0.15s ease-out' }}>
-                <div className="bg-white rounded-2xl h-[200px] md:h-[250px]"></div>
+                <div className="bg-[url(/services2.webp)] bg-cover border-white border-4 rounded-2xl h-[200px] md:h-[250px]"></div>
                 <h3 className="text-2xl md:text-3xl font-bold text-center">Desenvolvimento de Aplicativos</h3>
                 <p className="text-lg md:text-xl text-center md:text-left">Desenvolvemos aplicativos mobile intuitivos e performáticos, transformando suas ideias em soluções digitais.</p>
               </div>
