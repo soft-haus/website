@@ -9,7 +9,7 @@ Para que o formulário de contato funcione, é necessário configurar as variáv
 1. Crie um arquivo chamado `.env.local` na raiz do projeto. Você pode copiar o arquivo `.env.example` como base:
 
 ```bash
-cp .env.example .env.local
+cp .env.example .env
 ```
 
 2. Obtenha sua chave de API do **Resend**:
